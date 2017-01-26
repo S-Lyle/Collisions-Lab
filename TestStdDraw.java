@@ -39,17 +39,19 @@ public class TestStdDraw {
 
             if(A.getX()>=2-0.05||A.getX()<=0+0.05){ //adjusting boundary makes it closer to real boundary but you could miss a collision
                 A.changevX(-1*A.getvX());
+                A.changeXi(A.getX());
                 System.out.println("Collided with x wall");
             }
             if(A.getY()>=2-0.05||A.getY()<=0+0.05){
                 A.changevY(-1*A.getvY());
+                A.changeYi(A.getY());
                 System.out.println("collided with y wall");
             }
             double x2a= A.getX()+t*A.getvX(); //need position and velocity
             double y2a=A.getY()+A.getvY()*t;
             StdDraw.filledCircle(x2a, y2a, 0.05); // need to update the position of the particle as it moves
-            A.changeX(A.getX()+t*(A.getvX()));
-            A.changeY(A.getY()+t*(A.getvY()));
+            A.changeX(A.getXi()+t*(A.getvX()));
+            A.changeY(A.getYi()+t*(A.getvY()));
             StdDraw.show();
             StdDraw.pause(10); //helps support the offscreen buffering
             //System.out.print(A.getX()+ " ");
