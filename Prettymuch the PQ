@@ -1,0 +1,31 @@
+
+/**
+ * Created by Sarah on 1/24/2017.
+ */
+public class Collision {
+    double time_until;
+    Particle particle1;
+    Particle particle2;
+    int val1;
+    int val2;
+    public Collision(double time, Particle a, Particle b){
+        time_until=time;
+        particle1=a;
+        particle2=b;
+    }
+
+    public double getTime(){
+        return time_until;
+    }
+
+    public int compareTime(Collision two){
+        return Double.compare(two.time_until, this.time_until);
+
+       /* public boolean Validator() {
+            if (particle1 != null && particle1.count() != val1) return false;
+            if (particle2 != null && b.count() != val2) return false;
+            return true;
+        }*/
+    }
+
+}
