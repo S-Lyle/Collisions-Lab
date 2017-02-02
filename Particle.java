@@ -33,7 +33,7 @@ public class Particle {
     }
 
     public double getX(){
-       return X;
+        return X;
     }
     public double getY(){
         return Y;
@@ -68,38 +68,43 @@ public class Particle {
     public void changeY(double b){
         Y=b;
     }
-    public void changevX(double c){
-        vX=c;
+    public void bouncevX(){
+        vX= -vX;
+        count++;
     }
-    public void changevY(double d){
-        vY=d;
+    public void bouncevY(){
+        vY= -vY;
+        count++;
     }
     public void changeXi(double e){Xi=e;}
     public void changeYi(double f){Yi=f;}
+    public int count(){
+        return count;
+    }
 
-    public double collidesX(double t){//returns when particle collides with a wall vertically
-        double currentT=t;
+    public double collidesX(){//returns when particle collides with a wall vertically
+        //double currentT=t;
         double dt=-1;
-        
+
         if (vX==0) return INFINITY;
         else if(vX>0) {
-           dt= ((1-radius-X)/vX)-currentT;
+            dt= ((1-radius-X)/vX);
         }
         else if(vX<0){
-            dt=(radius-X)/vX-currentT;
+            dt=((radius-X)/vX);
         }
         return dt;
     }
 
-    public double collidesY(double t){//returns when particle collides with a wall vertically
-        double currentT=t;
+    public double collidesY(){//returns when particle collides with a wall vertically
+        //double currentT=t;
         double dt=-1;
         if (vY==0) return INFINITY;
-       else if(vY>0) {
-            dt= ((1-radius-Y)/vY)-currentT;
+        else if(vY>0) {
+            dt= ((1-radius-Y)/vY);
         }
-       else if(vY<0){
-            dt=(radius-Y)/vY-currentT;
+        else if(vY<0){
+            dt=((radius-Y)/vY);
         }
         return dt;
     }
@@ -127,6 +132,16 @@ public class Particle {
         // update collision counts
         this.count++;
         that.count++;
+    }
+    public double timeToVerticalWall() {
+        if      (vX > 0) return (1.0 - X - radius) / vX;
+        else if (vX < 0) return (radius - X) / vX;
+        else             return INFINITY;
+    }
+    public double timeToHorizontalWall() {
+        if      (vY > 0) return (1.0 - Y - radius) / vY;
+        else if (vY < 0) return (radius - Y) / vY;
+        else             return INFINITY;
     }
     public double timeToHit(Particle that) {
         if (this == that) return INFINITY;
