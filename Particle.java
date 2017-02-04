@@ -68,13 +68,19 @@ public class Particle {
     public void changeY(double b){
         Y=b;
     }
-    public void bouncevX(){
+    public void bounceoffVerticalWall(){
         vX= -vX;
+        Xi=X;
+        Yi=Y;
         count++;
+        System.out.println("bounce Vertical"+ X + " "+ Y);
     }
-    public void bouncevY(){
+    public void bounceoffHorizontalWall(){
         vY= -vY;
+        Yi=Y;
+        Xi=X;
         count++;
+        System.out.print("bounce Y"+X+" "+Y);
     }
     public void changeXi(double e){Xi=e;}
     public void changeYi(double f){Yi=f;}
@@ -82,8 +88,7 @@ public class Particle {
         return count;
     }
 
-    public double collidesX(){//returns when particle collides with a wall vertically
-        //double currentT=t;
+    public double collidesX(){//returns time when particle collides with a wall vertically
         double dt=-1;
 
         if (vX==0) return INFINITY;
@@ -96,7 +101,7 @@ public class Particle {
         return dt;
     }
 
-    public double collidesY(){//returns when particle collides with a wall vertically
+    public double collidesY(){//returns when particle collides with a wall horizontally
         //double currentT=t;
         double dt=-1;
         if (vY==0) return INFINITY;
@@ -106,6 +111,7 @@ public class Particle {
         else if(vY<0){
             dt=((radius-Y)/vY);
         }
+
         return dt;
     }
     public void bounceOff(Particle that) {
@@ -133,16 +139,7 @@ public class Particle {
         this.count++;
         that.count++;
     }
-    public double timeToVerticalWall() {
-        if      (vX > 0) return (1.0 - X - radius) / vX;
-        else if (vX < 0) return (radius - X) / vX;
-        else             return INFINITY;
-    }
-    public double timeToHorizontalWall() {
-        if      (vY > 0) return (1.0 - Y - radius) / vY;
-        else if (vY < 0) return (radius - Y) / vY;
-        else             return INFINITY;
-    }
+
     public double timeToHit(Particle that) {
         if (this == that) return INFINITY;
         double dx  = that.X - this.X;
@@ -157,7 +154,7 @@ public class Particle {
         double d = (dvdr*dvdr) - dvdv * (drdr - sigma*sigma);
         // if (drdr < sigma*sigma) StdOut.println("overlapping particles");
         if (d < 0) return INFINITY;
-        return -(dvdr + Math.sqrt(d)) / dvdv;
+        return -(dvdr + Math.sqrt(d)) / dvdv; //returns exact clocktime when to hit
     }
     public void move(double dt) {
         X += vX * dt;
