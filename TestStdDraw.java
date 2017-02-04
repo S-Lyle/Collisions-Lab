@@ -1,9 +1,3 @@
-import java.util.PriorityQueue;
-
-/**
- *
- * @author bmumey
- */
 public class TestStdDraw {
 
     /**
@@ -14,15 +8,15 @@ public class TestStdDraw {
         MinPQ<Collision> pq;
         pq = new MinPQ<Collision>();
         double clockTime = 0.0; //a priority queue that takes Collisions ;
+        StdDraw.setCanvasSize(400,400);
 
-        StdDraw.setScale(-1, 1); //sets the size of the balls spinning //how do the borders work? BORDER is final variable 0 to 1
         StdDraw.enableDoubleBuffering();
-        Particle[] Particles = new Particle[2];
-        Particle A = new Particle(.1, .1, .2, .1, 0.05, 1, 200, 0, 0);
+        Particle[] Particles = new Particle[1];
+        Particle A = new Particle(.3, .5, .12 ,.2, 0.05, .5, 200, 0, 0);
         Particles[0]=A;
-        Particle B = new Particle(.4, .4, .1, .13, 0.05, 1, 0, 0, 150);
-        Particles[1]=B;
-       // Particle C = new Particle(.6, .6, .12, .1, 0.05, 1, 0, 198, 0);
+        //Particle B = new Particle(.1, 0, .1, .4, 0.05, 1, 0, 0, 150);
+        //Particles[1]=B;
+        //Particle C = new Particle(.6, .6, .12, .1, 0.05, 1, 0, 198, 0);
         //Particles[2]=C;
 
         PQsort simulation = new PQsort(Particles);
@@ -58,4 +52,3 @@ public class TestStdDraw {
         }
 
     }
-
