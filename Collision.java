@@ -7,13 +7,13 @@ public class Collision implements Comparable<Collision> {
     Particle particle2;
     int val1;
     int val2;
-    public Collision(double time, Particle a, Particle b){
+    public Collision(double time, Particle particle1, Particle particle2){
         time_until=time;
-        particle1=a;
-        particle2=b;
-        if(a!=null) val1=a.count();
+        this.particle1=particle1;
+        this.particle2=particle2;
+        if(particle1!=null) val1=particle1.count();
         else        val1=-1;
-        if(b!=null) val2=b.count();
+        if(particle2!=null) val2=particle2.count();
         else        val2=-1;
     }
 
@@ -48,4 +48,5 @@ public class Collision implements Comparable<Collision> {
         //return Double.compare(this.getTime(),o.getTime());
     }
 }
+
 
