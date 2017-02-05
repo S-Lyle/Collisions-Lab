@@ -1,7 +1,3 @@
-/**
- * Created by Sarah on 1/21/2017.
- */
-
 public class Particle {
     double X;
     double Y;
@@ -121,19 +117,19 @@ public class Particle {
         double dvy = that.vY - this.vY;
         double dvdr = dx*dvx + dy*dvy;             // dv dot dr
         double dist = this.radius + that.radius;   // distance between particle centers at collison
+        double sigma= Math.sqrt((dx)*(dx)+(dy)*(dy)); //added sigma, I think its a better form of the distance between particles
 
         // magnitude of normal force
-        double magnitude = 2 * this.mass * that.mass * dvdr / ((this.mass + that.mass) * dist);
-
+        double magnitude = 2 * this.mass * that.mass * dvdr / ((this.mass + that.mass) * sigma); //changed dist to sigma
         // normal force, and in x and y directions
-        double fx = magnitude * dx / dist;
-        double fy = magnitude * dy / dist;
+        double fx = (magnitude * dx) / sigma;
+        double fy = (magnitude * dy) / sigma;
 
         // update velocities according to normal force
         this.vX += fx / this.mass;
         this.vY += fy / this.mass;
-        that.vX= fx / that.mass;
-        that.vY= fy / that.mass;
+        that.vX-= fx / that.mass; //changed this to -= instead of -
+        that.vY-= fy / that.mass;
 
         // update collision counts
         this.count++;
@@ -169,4 +165,3 @@ public class Particle {
         StdDraw.filledCircle(X, Y, radius);
     }
 
-}
