@@ -1,6 +1,3 @@
-/**
- * Created by Sarah on 1/24/2017.
- */
 public class PQsort  {
     public MinPQ<Collision> pq;
     public double clockTime = 0.0;
@@ -77,10 +74,8 @@ public class PQsort  {
             else if (one == null && two != null) two.bounceoffVerticalWall(); // particle-wall collision
             else if (one == null && two == null) redraw(timeLimit);
 
-
-            predict(one, timeLimit);
-            predict(two, timeLimit);
-
+            for(int i=0; i<particles.length; i++)
+                predict(particles[i], timeLimit);
 
         }
 
