@@ -49,4 +49,3 @@ public class Collision implements Comparable<Collision> {
     }
 }
 
-
